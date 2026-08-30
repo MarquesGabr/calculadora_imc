@@ -27,33 +27,28 @@ public class CalculadoraIMC extends Application {
         labelPeso.setPadding(new Insets(25));
 
         var inputPeso = new TextField();
-        inputPeso.setPromptText("peso em kg.");
+        inputPeso.setPromptText("Informe seu peso em kg.");
         inputPeso.getStyleClass().add("input");
-
-        var hBoxPeso = new HBox(10, labelPeso, inputPeso);
-        hBoxPeso.setAlignment(Pos.CENTER_LEFT);
 
         var labelAltura = new Label("Altura: ");
         labelAltura.getStyleClass().add("label");
         labelAltura.setPadding(new Insets(25));
 
         var inputAltura = new TextField();
-        inputAltura.setPromptText("altura em metros.");
+        inputAltura.setPromptText("Informe sua altura em metros.");
         inputAltura.getStyleClass().add("input");
-
-        var hboxAltura = new HBox(10, labelAltura, inputAltura);
-        hboxAltura.setAlignment(Pos.CENTER_LEFT);
 
         var labelResultado = new Label();
         labelResultado.getStyleClass().add("label");
         labelResultado.setPadding(new Insets(25));
 
-        var calcularButton = new Button("Calcular");
-        calcularButton.getStyleClass().add("button");
+        var buttonCalcular = new Button("Calcular");
+        buttonCalcular.getStyleClass().add("button");
 
-        calcularButton.setOnAction(e -> {
+        buttonCalcular.setOnAction(e -> {
             double peso = Double.parseDouble(inputPeso.getText());
             double altura = Double.parseDouble(inputAltura.getText());
+
             double imc = peso / Math.pow(altura, 2);
 
             if (imc < 17){
@@ -76,14 +71,35 @@ public class CalculadoraIMC extends Application {
             inputAltura.clear();
         });
 
-        var buttonBox = new HBox(calcularButton);
-        buttonBox.setAlignment(Pos.CENTER);
+        var layout = new GridPane();
+        var coluna1 = new ColumnConstraints();
+        var coluna2 = new ColumnConstraints();
+        layout.getColumnConstraints().addAll(coluna1, coluna2);
 
-        var vBox = new VBox(20, labelHeader, hBoxPeso, hboxAltura, buttonBox, labelResultado);
-        vBox.setPadding(new Insets(0));
-        vBox.getStyleClass().add("vbox");
+        coluna1.setHalignment(HPos.RIGHT);
+        coluna2.setHgrow(Priority.ALWAYS);
 
-        var scene = new Scene(vBox, 550, 450);
+        layout.setPadding(new Insets(20));
+
+        layout.addRow(0, labelHeader);
+        layout.addRow(1, labelPeso, inputPeso);
+        layout.addRow(2, labelAltura, inputAltura);
+        layout.addRow(3, buttonCalcular);
+        layout.addRow(4, labelResultado);
+
+        GridPane.setColumnSpan(labelHeader, 2);
+        GridPane.setHalignment(labelHeader, HPos.CENTER);
+
+        GridPane.setHgrow(inputPeso, Priority.ALWAYS);
+        GridPane.setHgrow(inputAltura, Priority.ALWAYS);
+
+        GridPane.setColumnSpan(buttonCalcular, 2);
+        GridPane.setHalignment(buttonCalcular, HPos.CENTER);
+
+        GridPane.setColumnSpan(labelResultado, 2);
+        GridPane.setHalignment(labelResultado, HPos.CENTER);
+
+        var scene = new Scene(layout, 550, 400);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
 
         primaryStage.setTitle("Calculadora de IMC");

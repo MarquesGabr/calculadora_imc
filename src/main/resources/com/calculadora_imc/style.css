@@ -3,7 +3,6 @@
     -fx-text-fill: #FFFFFF;
     -fx-font-size: 26px;
     -fx-font-weight: bold;
-    -fx-padding: 15px;
     -fx-border-width: 2px;
 }
 
@@ -23,8 +22,4 @@
     -fx-background-radius: 20px;
     -fx-padding: 10px 30px;
     -fx-cursor: hand;
-}
-
-.vbox {
-    -fx-background-color: #FFFFFF;
 }
