@@ -7,6 +7,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class CalculadoraIMC extends Application {
 
     public static void main(String[] args) {
@@ -18,51 +20,36 @@ public class CalculadoraIMC extends Application {
         var labelHeader = new Label("Calculadora de IMC");
         labelHeader.setMaxWidth(Double.MAX_VALUE);
         labelHeader.setAlignment(Pos.CENTER);
-        labelHeader.setStyle(
-                "-fx-background-color: #000000;" +
-                "-fx-text-fill: #FFFFFF;" +
-                "-fx-font-size: 26px;" +
-                "-fx-font-weight: bold;" +
-                "-fx-padding: 15px;" +
-                "-fx-border-width: 2px;"
-        );
+        labelHeader.getStyleClass().add("header");
 
         var labelPeso = new Label("Peso: ");
-        labelPeso.setStyle("-fx-font-size: 18px;");
+        labelPeso.getStyleClass().add("label");
         labelPeso.setPadding(new Insets(25));
 
         var inputPeso = new TextField();
         inputPeso.setPromptText("peso em kg.");
-        inputPeso.setStyle("-fx-font-size: 14px;");
+        inputPeso.getStyleClass().add("input");
 
         var hBoxPeso = new HBox(10, labelPeso, inputPeso);
         hBoxPeso.setAlignment(Pos.CENTER_LEFT);
 
-        var alturaLabel = new Label("Altura: ");
-        alturaLabel.setStyle("-fx-font-size: 18px;");
-        alturaLabel.setPadding(new Insets(25));
+        var labelAltura = new Label("Altura: ");
+        labelAltura.getStyleClass().add("label");
+        labelAltura.setPadding(new Insets(25));
 
         var inputAltura = new TextField();
         inputAltura.setPromptText("altura em metros.");
-        inputAltura.setStyle("-fx-font-size: 14px;");
+        inputAltura.getStyleClass().add("input");
 
-        var hboxAltura = new HBox(10, alturaLabel, inputAltura);
+        var hboxAltura = new HBox(10, labelAltura, inputAltura);
         hboxAltura.setAlignment(Pos.CENTER_LEFT);
 
         var labelResultado = new Label();
-        labelResultado.setStyle("-fx-font-size: 14px;");
+        labelResultado.getStyleClass().add("label");
         labelResultado.setPadding(new Insets(25));
 
         var calcularButton = new Button("Calcular");
-        calcularButton.setStyle(
-                "-fx-background-color: #1CCEFF;" +
-                        "-fx-text-fill: #FFFFFF;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-font-size: 16px;" +
-                        "-fx-background-radius: 20px;" +
-                        "-fx-padding: 10px 30px;" +
-                        "-fx-cursor: hand;"
-        );
+        calcularButton.getStyleClass().add("button");
 
         calcularButton.setOnAction(e -> {
             double peso = Double.parseDouble(inputPeso.getText());
@@ -94,9 +81,10 @@ public class CalculadoraIMC extends Application {
 
         var vBox = new VBox(20, labelHeader, hBoxPeso, hboxAltura, buttonBox, labelResultado);
         vBox.setPadding(new Insets(0));
-        vBox.setStyle("-fx-background-color: #FFFFFF;");
+        vBox.getStyleClass().add("vbox");
 
         var scene = new Scene(vBox, 550, 450);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
 
         primaryStage.setTitle("Calculadora de IMC");
         primaryStage.setScene(scene);
