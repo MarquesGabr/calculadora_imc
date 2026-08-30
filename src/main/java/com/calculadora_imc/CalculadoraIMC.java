@@ -48,25 +48,29 @@ public class CalculadoraIMC extends Application {
         buttonCalcular.getStyleClass().add("button");
 
         buttonCalcular.setOnAction(e -> {
-            double peso = Double.parseDouble(inputPeso.getText());
-            double altura = Double.parseDouble(inputAltura.getText());
+            try {
+                double peso = Double.parseDouble(inputPeso.getText().replace(",", "."));
+                double altura = Double.parseDouble(inputAltura.getText().replace(",", "."));
 
-            double imc = peso / Math.pow(altura, 2);
+                double imc = peso / Math.pow(altura, 2);
 
-            if (imc < 17){
-                labelResultado.setText(String.format("Seu IMC é: %.2f \nMuito abaixo do peso.", imc));
-            } else if (imc < 18.49) {
-                labelResultado.setText(String.format("Seu IMC é: %.2f \nAbaixo do peso.", imc));
-            } else if (imc < 24.99) {
-                labelResultado.setText(String.format("Seu IMC é: %.2f \nPeso normal.", imc));
-            } else if (imc < 29.99) {
-                labelResultado.setText(String.format("Seu IMC é: %.2f \nAcima do peso", imc));
-            } else if (imc < 34.99) {
-                labelResultado.setText(String.format("Seu IMC é: %.2f \nObesidade I.", imc));
-            } else if (imc < 39.99) {
-                labelResultado.setText(String.format("Seu IMC é: %.2f \nObesidade II (severa).", imc));
-            } else {
-                labelResultado.setText(String.format("Seu IMC é: %.2f \nObesidade III (mórbida).", imc));
+                if (imc < 17){
+                    labelResultado.setText(String.format("Seu IMC é: %.2f \nMuito abaixo do peso.", imc));
+                } else if (imc < 18.49) {
+                    labelResultado.setText(String.format("Seu IMC é: %.2f \nAbaixo do peso.", imc));
+                } else if (imc < 24.99) {
+                    labelResultado.setText(String.format("Seu IMC é: %.2f \nPeso normal.", imc));
+                } else if (imc < 29.99) {
+                    labelResultado.setText(String.format("Seu IMC é: %.2f \nAcima do peso", imc));
+                } else if (imc < 34.99) {
+                    labelResultado.setText(String.format("Seu IMC é: %.2f \nObesidade I.", imc));
+                } else if (imc < 39.99) {
+                    labelResultado.setText(String.format("Seu IMC é: %.2f \nObesidade II (severa).", imc));
+                } else {
+                    labelResultado.setText(String.format("Seu IMC é: %.2f \nObesidade III (mórbida).", imc));
+                }
+            } catch (NumberFormatException ex) {
+                labelResultado.setText("Entrada inválida! Insira apenas números");
             }
 
             inputPeso.clear();
