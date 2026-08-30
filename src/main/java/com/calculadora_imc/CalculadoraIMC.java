@@ -29,6 +29,7 @@ public class CalculadoraIMC extends Application {
         var inputPeso = new TextField();
         inputPeso.setPromptText("Informe seu peso em kg.");
         inputPeso.getStyleClass().add("input");
+        inputPeso.setMaxWidth(Double.MAX_VALUE);
 
         var labelAltura = new Label("Altura: ");
         labelAltura.getStyleClass().add("label");
@@ -37,6 +38,7 @@ public class CalculadoraIMC extends Application {
         var inputAltura = new TextField();
         inputAltura.setPromptText("Informe sua altura em metros.");
         inputAltura.getStyleClass().add("input");
+        inputAltura.setMaxWidth(Double.MAX_VALUE);
 
         var labelResultado = new Label();
         labelResultado.getStyleClass().add("label");
