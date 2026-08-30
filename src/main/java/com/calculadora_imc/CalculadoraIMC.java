@@ -52,6 +52,13 @@ public class CalculadoraIMC extends Application {
                 double peso = Double.parseDouble(inputPeso.getText().replace(",", "."));
                 double altura = Double.parseDouble(inputAltura.getText().replace(",", "."));
 
+                if (peso <= 0 || altura <= 0){
+                    labelResultado.setText("Peso e altura devem sem maiores do que 0");
+                    inputPeso.clear();
+                    inputAltura.clear();
+                    return;
+                }
+
                 double imc = peso / Math.pow(altura, 2);
 
                 if (imc < 17){
